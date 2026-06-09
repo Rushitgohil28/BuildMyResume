@@ -11,7 +11,12 @@ const experienceInput = document.getElementById("experience");
 const projectInput = document.getElementById("project");
 const skillsInput = document.getElementById("skills");
 const imageInput = document.getElementById("profileImage");
+
+// Toggles & Export
 const showPhotoCheckbox = document.getElementById("showPhoto");
+const showExperienceCheckbox = document.getElementById("showExperience");
+const showProjectCheckbox = document.getElementById("showProject");
+const exportDataBtn = document.getElementById("exportDataBtn");
 
 // Preview Elements
 const previewName = document.getElementById("previewName");
@@ -24,6 +29,10 @@ const previewExperience = document.getElementById("previewExperience");
 const previewProjects = document.getElementById("previewProjects");
 const previewSkills = document.getElementById("previewSkills");
 const previewImage = document.getElementById("previewImage");
+
+// Section Containers
+const experienceSection = document.getElementById("experienceSection");
+const projectSection = document.getElementById("projectSection");
 
 // ========================
 // 2. CORE FUNCTIONS
@@ -59,11 +68,6 @@ function updatePreview() {
     if (previewSkills) previewSkills.textContent = data.skills || "";
 }
 
-function toggleProfilePhoto() {
-    if (!previewImage || !showPhotoCheckbox) return;
-    previewImage.style.display = showPhotoCheckbox.checked ? "" : "none";
-}
-
 function selectTemplate(name) {
     localStorage.setItem("selectedTemplate", name);
     const resume = document.getElementById("resume-preview");
@@ -83,14 +87,54 @@ function saveHistory() {
 }
 
 // ========================
-// 3. EVENT LISTENERS
+// 3. TOGGLE VISIBILITY FUNCTIONS
+// ========================
+function toggleProfilePhoto() {
+    if (!previewImage || !showPhotoCheckbox) return;
+    previewImage.style.display = showPhotoCheckbox.checked ? "" : "none";
+}
+
+function toggleExperience() {
+    if (!experienceSection || !showExperienceCheckbox) return;
+    experienceSection.style.display = showExperienceCheckbox.checked ? "" : "none";
+}
+
+function toggleProject() {
+    if (!projectSection || !showProjectCheckbox) return;
+    projectSection.style.display = showProjectCheckbox.checked ? "" : "none";
+}
+
+// ========================
+// 4. EVENT LISTENERS
 // ========================
 // Auto-Save Inputs
 document.querySelectorAll(".left-panel input[type='text'], .left-panel input[type='email'], .left-panel textarea").forEach(input => {
     input.addEventListener("input", saveResume);
 });
 
-// Profile Photo Upload (WITH CANVAS COMPRESSION FIX)
+// Checkbox Listeners
+if (showPhotoCheckbox) {
+    showPhotoCheckbox.addEventListener("change", () => {
+        toggleProfilePhoto();
+        localStorage.setItem("showPhoto", showPhotoCheckbox.checked);
+    });
+}
+
+if (showExperienceCheckbox) {
+    showExperienceCheckbox.addEventListener("change", () => {
+        toggleExperience();
+        localStorage.setItem("showExperience", showExperienceCheckbox.checked);
+    });
+}
+
+if (showProjectCheckbox) {
+    showProjectCheckbox.addEventListener("change", () => {
+        toggleProject();
+        localStorage.setItem("showProject", showProjectCheckbox.checked);
+    });
+}
+
+// Profile Photo Upload (With Canvas Compression)
 if (imageInput) {
     imageInput.addEventListener("change", function () {
         const file = this.files[0];
@@ -98,21 +142,16 @@ if (imageInput) {
 
         const reader = new FileReader();
         reader.onload = function (e) {
-            // 1. Create an off-screen image to read the uploaded file
             const img = new Image();
             img.src = e.target.result;
 
             img.onload = function () {
-                // 2. Create a temporary canvas
                 const canvas = document.createElement("canvas");
                 const ctx = canvas.getContext("2d");
-
-                // 3. Set a maximum size for the profile photo (300px is plenty for a resume)
                 const MAX_SIZE = 300;
                 let width = img.width;
                 let height = img.height;
 
-                // 4. Calculate the new dimensions while keeping the aspect ratio perfect
                 if (width > height) {
                     if (width > MAX_SIZE) {
                         height *= MAX_SIZE / width;
@@ -127,19 +166,14 @@ if (imageInput) {
 
                 canvas.width = width;
                 canvas.height = height;
-
-                // 5. Draw the shrunken image onto the canvas
                 ctx.drawImage(img, 0, 0, width, height);
 
-                // 6. Compress it into a lightweight JPEG (70% quality)
                 const compressedBase64 = canvas.toDataURL("image/jpeg", 0.7);
 
-                // 7. Update the UI with the compressed image
                 if (previewImage) previewImage.src = compressedBase64;
                 const navProfilePic = document.getElementById("navProfilePic");
                 if (navProfilePic) navProfilePic.src = compressedBase64;
 
-                // 8. Safely save the tiny image to localStorage without crashing!
                 try {
                     localStorage.setItem("profileImage", compressedBase64);
                 } catch (error) {
@@ -151,8 +185,101 @@ if (imageInput) {
         reader.readAsDataURL(file);
     });
 }
+
+// Export Data to TXT File
+if (exportDataBtn) {
+    exportDataBtn.addEventListener("click", () => {
+        const dataString = localStorage.getItem("resumeData");
+        if (!dataString) {
+            alert("No data to save yet! Type something first.");
+            return;
+        }
+
+        const data = JSON.parse(dataString);
+        const textContent = `
+=========================================
+          RESUME DATA BACKUP
+=========================================
+
+NAME: ${data.name || "N/A"}
+TITLE: ${data.title || "N/A"}
+EMAIL: ${data.email || "N/A"}
+PHONE: ${data.phone || "N/A"}
+
+-----------------------------------------
+PROFESSIONAL SUMMARY
+-----------------------------------------
+${data.summary || "N/A"}
+
+-----------------------------------------
+EDUCATION
+-----------------------------------------
+${data.education || "N/A"}
+
+-----------------------------------------
+EXPERIENCE
+-----------------------------------------
+${data.experience || "N/A"}
+
+-----------------------------------------
+PROJECTS
+-----------------------------------------
+${data.project || "N/A"}
+
+-----------------------------------------
+SKILLS
+-----------------------------------------
+${data.skills || "N/A"}
+        `.trim();
+
+        const blob = new Blob([textContent], { type: "text/plain" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "My_Resume_Backup.txt";
+        
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
+}
+
+// Direct PDF Download via html2pdf
+const downloadBtn = document.querySelector(".download-btn");
+if (downloadBtn) {
+    downloadBtn.addEventListener("click", () => {
+        const originalText = downloadBtn.innerText;
+        downloadBtn.innerText = "Generating PDF...";
+        downloadBtn.disabled = true;
+
+        saveHistory();
+
+        const element = document.getElementById("resume-preview");
+        const opt = {
+            margin:       0, 
+            filename:     'My_Professional_Resume.pdf',
+            image:        { type: 'jpeg', quality: 1.0 },
+            html2canvas:  { 
+                scale: 2, 
+                useCORS: true, 
+                letterRendering: true
+            },
+            jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element).save().then(() => {
+            downloadBtn.innerText = originalText;
+            downloadBtn.disabled = false;
+        }).catch(err => {
+            console.error("PDF Error:", err);
+            alert("Something went wrong generating the PDF.");
+            downloadBtn.innerText = originalText;
+            downloadBtn.disabled = false;
+        });
+    });
+}
+
 // ========================
-// 4. BOOT UP ON PAGE LOAD
+// 5. BOOT UP ON PAGE LOAD
 // ========================
 function loadResume() {
     const data = JSON.parse(localStorage.getItem("resumeData"));
@@ -173,12 +300,18 @@ document.addEventListener("DOMContentLoaded", () => {
     loadResume();
     updatePreview();
 
-    // Load Checkbox state
+    // Load Checkbox states
     const savedShowPhoto = localStorage.getItem("showPhoto");
-    if (savedShowPhoto !== null && showPhotoCheckbox) {
-        showPhotoCheckbox.checked = savedShowPhoto === "true";
-    }
+    if (savedShowPhoto !== null && showPhotoCheckbox) showPhotoCheckbox.checked = savedShowPhoto === "true";
     toggleProfilePhoto();
+
+    const savedShowExperience = localStorage.getItem("showExperience");
+    if (savedShowExperience !== null && showExperienceCheckbox) showExperienceCheckbox.checked = savedShowExperience === "true";
+    toggleExperience();
+
+    const savedShowProject = localStorage.getItem("showProject");
+    if (savedShowProject !== null && showProjectCheckbox) showProjectCheckbox.checked = savedShowProject === "true";
+    toggleProject();
 
     // Load Profile Image
     const savedImage = localStorage.getItem("profileImage");
@@ -194,26 +327,3 @@ document.addEventListener("DOMContentLoaded", () => {
         resumePreview.classList.add(selectedTemplate);
     }
 });
-
-// ========================
-// DOWNLOAD BUTTON (DEBUG VERSION)
-// ========================
-const downloadBtn = document.querySelector(".download-btn");
-
-if (downloadBtn) {
-    downloadBtn.addEventListener("click", () => {
-        try {
-            console.log("Download button clicked!");
-            
-            // Try saving history first
-            saveHistory();
-            
-            // Trigger the print dialog
-            window.print();
-        } catch (error) {
-            // If anything fails, it will pop up on your screen!
-            console.error("PDF Export Error:", error);
-            alert("An error occurred: " + error.message);
-        }
-    });
-}
