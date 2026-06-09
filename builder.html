@@ -10,10 +10,12 @@
 </head>
 <body>
 
+    <!-- Background Effects -->
     <div class="blob blob1"></div>
     <div class="blob blob2"></div>
     <div class="blob blob3"></div>
 
+    <!-- Navbar -->
     <nav class="navbar">
         <div class="logo-area">
             <a href="profile.html" style="display: flex; align-items: center; gap: 15px; text-decoration: none; color: inherit;">
@@ -44,8 +46,10 @@
         </div>
     </nav>
 
+    <!-- Main Builder -->
     <div class="builder-container">
 
+        <!-- LEFT PANEL -->
         <aside class="left-panel">
             <h3>Resume Details</h3>
             
@@ -54,11 +58,26 @@
             <input type="email" id="email" placeholder="Email">
             <input type="text" id="phone" placeholder="Phone Number">
             <textarea id="summary" placeholder="Professional Summary"></textarea>
+            
             <textarea id="education" placeholder="Education Details"></textarea>
+            
             <textarea id="experience" placeholder="Experience Details"></textarea>
+            <!-- Toggle for Experience -->
+            <div class="checkbox-container">
+                <input type="checkbox" id="showExperience" checked>
+                <label for="showExperience">Show Experience Section</label>
+            </div>
+
             <textarea id="project" placeholder="Project Details"></textarea>
+            <!-- Toggle for Projects -->
+            <div class="checkbox-container">
+                <input type="checkbox" id="showProject" checked>
+                <label for="showProject">Show Project Section</label>
+            </div>
+
             <textarea id="skills" placeholder="Skills"></textarea>
 
+            <!-- Photo Upload -->
             <div class="custom-file-upload">
                 <input type="file" id="profileImage" accept="image/*" hidden>
                 <label for="profileImage" class="upload-btn">
@@ -71,12 +90,19 @@
                 </label>
             </div>
 
+            <!-- Photo Toggle -->
             <div class="checkbox-container">
                 <input type="checkbox" id="showPhoto" checked>
                 <label for="showPhoto">Show Profile Photo</label>
             </div>
+
+            <!-- Export Data Button -->
+            <button id="exportDataBtn" style="width: 100%; padding: 14px; margin-top: 10px; border-radius: 14px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; font-weight: 500; cursor: pointer; transition: 0.3s;">
+                💾 Save Data to TXT File
+            </button>
         </aside>
 
+        <!-- CENTER PANEL -->
         <main class="preview-panel">
             <div id="resume-preview">
                 <div class="resume-header">
@@ -97,25 +123,30 @@
                     <h2>Education</h2>
                     <p id="previewEducation">Education details will appear here.</p>
                 </section>
-                <section>
+                
+                <section id="experienceSection">
                     <h2>Experience</h2>
                     <p id="previewExperience">Experience details will appear here.</p>
                 </section>
-                <section>
+                
+                <section id="projectSection">
                     <h2>Projects</h2>
                     <p id="previewProjects">Project details will appear here.</p>
                 </section>
+
                 <section>
                     <h2>Skills</h2>
                     <p id="previewSkills">Skills will appear here.</p>
                 </section>
             </div>
 
+            <!-- Download Button -->
             <div class="download-container">
                 <button class="download-btn">Download PDF</button>
             </div>
         </main>
 
+        <!-- RIGHT PANEL -->
         <aside class="right-panel">
             <h3>Templates</h3>
             <div class="template-list">
@@ -132,6 +163,10 @@
 
     </div>
 
+    <!-- html2pdf Library for Direct PDF Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <!-- Scripts -->
     <script src="js/builder.js"></script>
     <script src="js/theme.js"></script>
 
