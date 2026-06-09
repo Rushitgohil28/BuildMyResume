@@ -1,0 +1,249 @@
+/* =========================================
+   BASE RESET FOR TEMPLATES
+   Ensures smooth transitions between styles
+========================================= */
+#resume-preview {
+    transition: all 0.4s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+#resume-preview h1, 
+#resume-preview h2, 
+#resume-preview p,
+#resume-preview .resume-header {
+    transition: all 0.3s ease;
+}
+
+/* =========================================
+   1. PROFESSIONAL (The Standard)
+========================================= */
+#resume-preview.professional {
+    font-family: 'Times New Roman', serif;
+    color: #333;
+}
+#resume-preview.professional h1 {
+    color: #111;
+    font-size: 42px;
+    letter-spacing: 1px;
+}
+#resume-preview.professional h2 {
+    color: #000;
+    border-bottom: 2px solid #333;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+#resume-preview.professional hr {
+    border-color: #333;
+    border-width: 2px;
+}
+
+/* =========================================
+   2. MODERN (Sleek & Colorful)
+========================================= */
+#resume-preview.modern {
+    font-family: 'Inter', sans-serif;
+    padding: 0; /* Overrides base padding to allow full-width header */
+}
+#resume-preview.modern .resume-header {
+    background: #2563eb;
+    color: white;
+    padding: 60px;
+    margin-bottom: 40px;
+}
+#resume-preview.modern .resume-header p {
+    color: #bfdbfe;
+}
+#resume-preview.modern .avatar {
+    border: 4px solid white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+#resume-preview.modern section {
+    padding: 0 60px;
+}
+#resume-preview.modern h2 {
+    color: #2563eb;
+    background: #eff6ff;
+    padding: 8px 15px;
+    border-left: 4px solid #2563eb;
+    border-radius: 0 8px 8px 0;
+}
+#resume-preview.modern hr {
+    display: none; /* Hidden in modern layout */
+}
+
+/* =========================================
+   3. DEVELOPER (Tech & Monospace)
+========================================= */
+#resume-preview.developer {
+    font-family: 'Courier New', Courier, monospace;
+    background: #fafafa;
+}
+#resume-preview.developer h1::before {
+    content: "< ";
+    color: #10b981;
+}
+#resume-preview.developer h1::after {
+    content: " />";
+    color: #10b981;
+}
+#resume-preview.developer h2 {
+    color: #10b981;
+    text-transform: lowercase;
+}
+#resume-preview.developer h2::before {
+    content: "const ";
+    color: #6366f1;
+}
+#resume-preview.developer h2::after {
+    content: " = {";
+    color: #6366f1;
+}
+#resume-preview.developer p {
+    border-left: 2px dashed #cbd5e1;
+    padding-left: 15px;
+    margin-left: 10px;
+}
+#resume-preview.developer hr {
+    border: 1px dashed #cbd5e1;
+}
+
+/* =========================================
+   4. EXECUTIVE (Minimalist & Centered)
+========================================= */
+#resume-preview.executive {
+    font-family: 'Georgia', serif;
+}
+#resume-preview.executive .resume-header {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 20px;
+}
+#resume-preview.executive .avatar {
+    width: 140px;
+    height: 140px;
+}
+#resume-preview.executive h1 {
+    font-size: 38px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+#resume-preview.executive h2 {
+    text-align: center;
+    color: #475569;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+#resume-preview.executive hr {
+    width: 50px;
+    margin: 30px auto;
+    border-color: #94a3b8;
+    border-width: 2px;
+}
+
+/* =========================================
+   5. CREATIVE (Bold & Asymmetrical)
+========================================= */
+#resume-preview.creative {
+    font-family: 'Inter', sans-serif;
+}
+#resume-preview.creative h1 {
+    font-size: 50px;
+    font-weight: 800;
+    background: linear-gradient(90deg, #ec4899, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+#resume-preview.creative .avatar {
+    border-radius: 20px; /* Square with rounded corners instead of circle */
+    transform: rotate(5deg);
+}
+#resume-preview.creative h2 {
+    color: #111827;
+    font-size: 24px;
+    font-weight: 800;
+    display: inline-block;
+    box-shadow: inset 0 -10px 0 #fbcfe8; /* Highlighting effect */
+    padding-bottom: 0;
+}
+#resume-preview.creative hr {
+    border-color: #ec4899;
+    opacity: 0.3;
+}
+
+/* =========================================
+   6. FRESHER (Clean & Approachable)
+========================================= */
+#resume-preview.fresher {
+    font-family: 'Inter', sans-serif;
+    background: #ffffff;
+}
+#resume-preview.fresher h1 {
+    color: #0d9488;
+}
+#resume-preview.fresher .resume-header {
+    background: #f0fdfa;
+    padding: 40px;
+    border-radius: 24px;
+}
+#resume-preview.fresher h2 {
+    color: #0f766e;
+    border-bottom: 2px dashed #99f6e4;
+    padding-bottom: 8px;
+}
+#resume-preview.fresher hr {
+    display: none;
+}
+
+/* =========================================
+   7. CORPORATE (Strict Grid)
+========================================= */
+#resume-preview.corporate {
+    font-family: 'Arial', sans-serif;
+}
+#resume-preview.corporate .resume-header {
+    border-bottom: 4px solid #1e3a8a;
+    padding-bottom: 30px;
+}
+#resume-preview.corporate h1 {
+    color: #1e3a8a;
+    text-transform: uppercase;
+}
+#resume-preview.corporate h2 {
+    color: white;
+    background: #1e3a8a;
+    padding: 5px 10px;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+#resume-preview.corporate hr {
+    display: none;
+}
+
+/* =========================================
+   8. PREMIUM (Luxury & Elegant)
+========================================= */
+#resume-preview.premium {
+    font-family: 'Georgia', serif;
+    border: 8px solid #f8fafc;
+    outline: 1px solid #d4af37;
+    padding: 50px;
+}
+#resume-preview.premium h1 {
+    color: #d4af37;
+    font-style: italic;
+}
+#resume-preview.premium h2 {
+    color: #1f2937;
+    text-align: center;
+}
+#resume-preview.premium section {
+    border-top: 1px solid #d4af37;
+    padding-top: 20px;
+    margin-top: 20px;
+}
+#resume-preview.premium hr {
+    display: none;
+}

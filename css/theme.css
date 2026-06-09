@@ -1,0 +1,81 @@
+:root{
+    --text:#ffffff;
+    --secondary:#94a3b8;
+}
+
+body.light{
+    --text:#111827;
+    --secondary:#374151;
+}
+
+body{
+    color:var(--text);
+}
+
+.logo-area p,
+footer,
+.template-card p{
+    color:var(--secondary);
+}
+
+.theme-switch{
+    position:relative;
+
+    width:70px;
+    height:36px;
+
+    display:inline-block;
+}
+
+.theme-switch input{
+    display:none;
+}
+
+.slider{
+    position:absolute;
+
+    inset:0;
+
+    cursor:pointer;
+
+    background:#1e293b;
+
+    border-radius:50px;
+
+    transition:.3s;
+}
+
+.slider::before{
+
+    content:"🌙";
+
+    position:absolute;
+
+    width:28px;
+    height:28px;
+
+    left:4px;
+    top:4px;
+
+    background:white;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:.3s;
+}
+
+input:checked + .slider{
+    background:#60a5fa;
+}
+
+input:checked + .slider::before{
+
+    transform:
+    translateX(34px);
+
+    content:"☀️";
+}
