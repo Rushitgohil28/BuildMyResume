@@ -194,3 +194,26 @@ document.addEventListener("DOMContentLoaded", () => {
         resumePreview.classList.add(selectedTemplate);
     }
 });
+
+// ========================
+// DOWNLOAD BUTTON (DEBUG VERSION)
+// ========================
+const downloadBtn = document.querySelector(".download-btn");
+
+if (downloadBtn) {
+    downloadBtn.addEventListener("click", () => {
+        try {
+            console.log("Download button clicked!");
+            
+            // Try saving history first
+            saveHistory();
+            
+            // Trigger the print dialog
+            window.print();
+        } catch (error) {
+            // If anything fails, it will pop up on your screen!
+            console.error("PDF Export Error:", error);
+            alert("An error occurred: " + error.message);
+        }
+    });
+}
