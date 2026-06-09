@@ -162,6 +162,8 @@ body.light .left-panel input::placeholder, body.light .left-panel textarea::plac
 body.light .checkbox-container { color: #1e293b; }
 body.light .upload-btn { background: #f1f5f9; border: 1px dashed #cbd5e1; color: #475569; }
 body.light .upload-btn:hover { border-color: #3b82f6; background: #e2e8f0; color: #2563eb; }
+body.light #exportDataBtn { background: #f1f5f9; border: 1px solid #cbd5e1; color: #475569; }
+body.light #exportDataBtn:hover { background: #e2e8f0; border-color: #3b82f6; }
 
 /* =========================
    TABLET LAYOUT (MAX 1200px)
@@ -204,23 +206,4 @@ body.light .upload-btn:hover { border-color: #3b82f6; background: #e2e8f0; color
     .resume-header { flex-direction: column-reverse; text-align: center; gap: 15px; }
     .resume-header h1 { font-size: 28px; }
     .avatar { width: 90px; height: 90px; margin: 0 auto; }
-}
-
-/* =========================
-   PRINT LAYOUT (PDF EXPORT)
-========================= */
-@media print {
-    @page { margin: 0; size: A4 portrait; }
-    .navbar, .left-panel, .right-panel, .download-container, .blob { display: none !important; }
-    html, body { background: white !important; margin: 0 !important; padding: 0 !important; width: 100% !important; height: auto !important; overflow: visible !important; }
-    .builder-container, .preview-panel { display: block !important; position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; margin: 0 !important; padding: 0 !important; background: white !important; }
-    #resume-preview { position: relative !important; margin: 0 auto !important; max-width: 800px !important; padding: 40px 50px !important; box-shadow: none !important; transform: none !important; min-height: 0 !important; }
-    #resume-preview section { page-break-inside: avoid; break-inside: avoid; }
-    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-    #resume-preview, #resume-preview p { font-size: 12px !important; line-height: 1.4 !important; }
-    #resume-preview h1 { font-size: 24px !important; margin-bottom: 5px !important; }
-    #resume-preview h2 { font-size: 16px !important; margin-bottom: 5px !important; }
-    #resume-preview section { margin-top: 15px !important; }
-    #resume-preview hr { margin: 10px 0 !important; }
-    #resume-preview .avatar { width: 80px !important; height: 80px !important; }
 }
