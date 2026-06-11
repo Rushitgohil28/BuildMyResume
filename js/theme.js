@@ -3,17 +3,19 @@
 // ========================
 
 // Saves the template and redirects to the builder
+// Saves the template and redirects OR updates live preview
 function selectTemplate(templateName) {
     localStorage.setItem("selectedTemplate", templateName);
-    window.location.href = "builder.html";
-}
-
-// "Start Building" Button -> Goes directly to builder
-const startBtn = document.querySelector(".primary-btn");
-if (startBtn) {
-    startBtn.addEventListener("click", () => {
+    
+    const previewContainer = document.getElementById("resume-preview");
+    if (previewContainer) {
+        // If we are on the builder page, update live!
+        previewContainer.className = "";
+        previewContainer.classList.add(templateName);
+    } else {
+        // If we are on the home page, redirect to builder!
         window.location.href = "builder.html";
-    });
+    }
 }
 
 // "Explore Templates" Button -> Scrolls down to the grid
@@ -26,30 +28,32 @@ if (exploreBtn) {
 }
 
 // ========================
-// THEME TOGGLE (DARK/LIGHT MODE)
+// THEME LOGIC (SAFE VERSION)
 // ========================
-const themeToggle = document.getElementById("themeToggle");
-const body = document.body;
+(function() {
+    const themeToggle = document.getElementById("themeToggle");
+    const body = document.body;
 
-if (themeToggle) {
-    // Check local storage for saved theme on page load
+    // Apply saved theme immediately on load
     const savedTheme = localStorage.getItem("appTheme");
     if (savedTheme === "light") {
         body.classList.add("light");
-        themeToggle.checked = true;
+        if (themeToggle) themeToggle.checked = true;
     }
 
-    // Listen for toggle clicks
-    themeToggle.addEventListener("change", () => {
-        if (themeToggle.checked) {
-            body.classList.add("light");
-            localStorage.setItem("appTheme", "light");
-        } else {
-            body.classList.remove("light");
-            localStorage.setItem("appTheme", "dark");
-        }
-    });
-}
+    // Only add listener if the toggle exists on this page
+    if (themeToggle) {
+        themeToggle.addEventListener("change", () => {
+            if (themeToggle.checked) {
+                body.classList.add("light");
+                localStorage.setItem("appTheme", "light");
+            } else {
+                body.classList.remove("light");
+                localStorage.setItem("appTheme", "dark");
+            }
+        });
+    }
+})();
 
 // ========================
 // MOBILE HAMBURGER MENU
