@@ -1,20 +1,8 @@
 /* =========================
    BASE RESET
 ========================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', sans-serif;
-}
-
-body {
-    min-height: 100vh;
-    background: #0b1120;
-    color: white;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+body { min-height: 100vh; background: #0b1120; color: white; overflow-x: hidden; overflow-y: auto; }
 
 /* =========================
    BACKGROUND BLOBS
@@ -25,39 +13,20 @@ body {
 .blob3 { width: 350px; height: 350px; background: #06b6d4; top: 40%; left: 50%; transform: translate(-50%, -50%); }
 
 /* =========================
-   NAVBAR (DESKTOP)
+   NAVBAR & SIDE PANELS
 ========================= */
-.navbar {
-    width: 95%; margin: 20px auto; padding: 15px 25px; display: flex;
-    justify-content: space-between; align-items: center;
-    background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px;
-    z-index: 100; position: relative;
-}
-
+.navbar { width: 95%; margin: 20px auto; padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 24px; z-index: 100; position: relative;  }
+.logo-area { display: flex; align-items: center; gap: 15px; }
 .logo-area img { width: 45px; height: 45px; object-fit: contain; }
 .logo-text h2 { font-size: 22px; font-weight: 700; margin: 0; }
 .logo-text p { font-size: 12px; color: #94a3b8; margin: 0; }
-
 .nav-links { display: flex; align-items: center; gap: 30px; }
 .nav-links a { color: white; text-decoration: none; font-weight: 500; transition: color 0.3s; }
 .nav-links a:hover { color: #3b82f6; }
-
-.nav-profile-pic {
-    width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
-    border: 2px solid #3b82f6; cursor: pointer; transition: transform 0.3s;
-}
+.nav-profile-pic { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid #3b82f6; cursor: pointer; transition: transform 0.3s; }
 .nav-profile-pic:hover { transform: scale(1.1); }
-
 .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 101; }
 .hamburger span { width: 28px; height: 3px; background-color: white; border-radius: 3px; transition: all 0.3s ease; }
-
-/* Hamburger Animations */
-.hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-/* Theme Toggle */
 .theme-switch { position: relative; width: 70px; height: 36px; display: inline-block; }
 .theme-switch input { display: none; }
 .slider { position: absolute; inset: 0; background: #1e293b; border-radius: 50px; cursor: pointer; transition: .3s; }
@@ -65,43 +34,17 @@ body {
 input:checked + .slider { background: #60a5fa; }
 input:checked + .slider::before { transform: translateX(34px); content: "☀️"; }
 
-/* =========================
-   MAIN LAYOUT PANELS
-========================= */
-.builder-container {
-    display: grid; grid-template-columns: 280px 1fr 280px; gap: 20px;
-    height: calc(100vh - 110px); padding: 20px;
-}
-
-.left-panel, .right-panel {
-    background: rgba(255,255,255,.05); backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,.08); border-radius: 24px;
-    padding: 20px; overflow-y: auto;
-}
-
+.builder-container { display: grid; grid-template-columns: 280px 1fr 280px; gap: 20px; height: calc(100vh - 110px); padding: 20px; }
+.left-panel, .right-panel { background: rgba(255,255,255,.05); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,.08); border-radius: 24px; padding: 20px; overflow-y: auto; }
 .left-panel h3, .right-panel h3 { margin-bottom: 20px; }
 
-/* =========================
-   INPUTS & FILE UPLOAD
-========================= */
-.left-panel input[type="text"], .left-panel input[type="email"], .left-panel textarea {
-    width: 100%; padding: 14px; margin-bottom: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 14px;
-    background: rgba(255, 255, 255, 0.05); color: white; font-size: 14px;
-    outline: none; transition: all 0.3s ease;
-}
-
+.left-panel input[type="text"], .left-panel input[type="email"], .left-panel textarea { width: 100%; padding: 14px; margin-bottom: 16px; border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 14px; background: rgba(255, 255, 255, 0.05); color: white; font-size: 14px; outline: none; transition: all 0.3s ease; }
 .left-panel textarea { min-height: 100px; resize: vertical; }
 .left-panel input::placeholder, .left-panel textarea::placeholder { color: #94a3b8; }
 .left-panel input:focus, .left-panel textarea:focus { border-color: #3b82f6; background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
 
 .custom-file-upload { margin-bottom: 16px; }
-.upload-btn {
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-    width: 100%; padding: 14px; border: 1px dashed rgba(255, 255, 255, 0.3);
-    border-radius: 14px; background: rgba(255, 255, 255, 0.05); color: white;
-    font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s ease;
-}
+.upload-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 14px; border: 1px dashed rgba(255, 255, 255, 0.3); border-radius: 14px; background: rgba(255, 255, 255, 0.05); color: white; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
 .upload-btn svg { transition: transform 0.3s ease; }
 .upload-btn:hover { border-color: #3b82f6; background: rgba(59, 130, 246, 0.1); color: #60a5fa; }
 .upload-btn:hover svg { transform: translateY(-2px); }
@@ -109,40 +52,64 @@ input:checked + .slider::before { transform: translateX(34px); content: "☀️"
 .checkbox-container { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; color: white; font-size: 14px; cursor: pointer; }
 .checkbox-container input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; margin: 0; accent-color: #3b82f6; }
 
-/* =========================
-   BUTTONS (TEMPLATES & PDF)
-========================= */
-.template-list button {
-    width: 100%; padding: 14px; margin-bottom: 12px; border: none; border-radius: 16px;
-    background: rgba(255,255,255,.05); color: white; cursor: pointer; transition: .3s;
-}
+.template-list button { width: 100%; padding: 14px; margin-bottom: 12px; border: none; border-radius: 16px; background: rgba(255,255,255,.05); color: white; cursor: pointer; transition: .3s; }
 .template-list button:hover { transform: translateY(-2px); background: rgba(59,130,246,.15); }
 
 .download-container { display: flex; justify-content: center; margin-top: 20px; padding-bottom: 30px; }
-.download-container .download-btn {
-    padding: 14px 28px; font-size: 15px; font-weight: 600; border: none;
-    border-radius: 10px; width: auto; background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-    color: white; cursor: pointer; transition: .3s; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
-}
+.download-container .download-btn { padding: 14px 28px; font-size: 15px; font-weight: 600; border: none; border-radius: 10px; width: auto; background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; cursor: pointer; transition: .3s; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); }
 .download-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(59,130,246,.4); }
 
-/* =========================
-   RESUME PREVIEW (CENTER)
-========================= */
+/* =========================================
+   STRICT AUTO-FIT SPACING OVERRIDES
+========================================= */
 .preview-panel { overflow-y: auto; }
+
 #resume-preview {
     max-width: 900px; margin: auto; background: white; color: black;
-    border-radius: 24px; padding: 60px; min-height: 1100px;
-    box-shadow: 0 20px 50px rgba(0,0,0,.25); transition: .3s;
+    border-radius: 24px; padding: 50px; min-height: 1122px; height: auto !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,.25); 
+    transition: transform 0.3s, box-shadow 0.3s; 
+    
+    /* Dynamic Variables initialized smaller */
+    font-size: 14px; 
+    --line-height: 1.5;
+    --spacing: 1.2em;
 }
-#resume-preview:hover { transform: scale(1.01); }
-.resume-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.resume-header h1 { font-size: 36px; }
-.resume-header p { color: #555; }
-.avatar { width: 110px; height: 110px; border-radius: 50%; background: #ddd; display: flex; justify-content: center; align-items: center; font-size: 14px; color: #555; object-fit: cover; }
-#resume-preview hr { margin: 20px 0; }
-#resume-preview section { margin-top: 25px; }
-#resume-preview h2 { margin-bottom: 10px; color: #2563eb; }
+
+#resume-preview * { line-height: var(--line-height) !important; }
+#resume-preview h1, #resume-preview h2, #resume-preview p { margin: 0 !important; }
+
+/* The new Newspaper CSS! Splits content strictly down the middle */
+#resume-body.newspaper {
+    column-count: 2;
+    column-gap: 40px;
+    margin-top: 10px;
+}
+
+/* Prevents sections from awkwardly splitting across the two columns */
+#resume-body.newspaper section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+#resume-preview section { 
+    margin-top: var(--spacing) !important; 
+    margin-bottom: 0 !important;
+    padding: 5px; 
+    border-radius: 8px; 
+}
+#resume-preview section:hover { background: rgba(0, 0, 0, 0.02); }
+
+.resume-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing) !important; }
+.resume-header h1 { font-size: 2.5em; }
+.resume-header p { font-size: 1em; color: #555; }
+.avatar { width: 7em; height: 7em; border-radius: 50%; background: #ddd; display: flex; justify-content: center; align-items: center; font-size: 0.9em; color: #555; object-fit: cover; }
+#resume-preview hr { margin: var(--spacing) 0 !important; }
+#resume-preview h2 { font-size: 1.4em; margin-bottom: 0.3em !important; color: #2563eb; }
+#resume-preview p { font-size: 1em; white-space: pre-wrap; }
+
+[contenteditable="true"] { outline: none; border-radius: 6px; transition: background 0.3s ease, padding 0.3s ease; }
+[contenteditable="true"]:hover { background: rgba(59, 130, 246, 0.1); cursor: text; padding: 2px 5px; }
 
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-thumb { background: #334155; border-radius: 20px; }
@@ -166,44 +133,198 @@ body.light #exportDataBtn { background: #f1f5f9; border: 1px solid #cbd5e1; colo
 body.light #exportDataBtn:hover { background: #e2e8f0; border-color: #3b82f6; }
 
 /* =========================
-   TABLET LAYOUT (MAX 1200px)
+   RESPONSIVE LAYOUTS
 ========================= */
 @media (max-width: 1200px) {
     .builder-container { grid-template-columns: 1fr; height: auto; overflow: visible; gap: 30px; }
     .left-panel, .right-panel { display: block; height: auto; }
-    .right-panel { order: -1; }
-    .left-panel { order: 0; }
-    .preview-panel { order: 1; padding: 0; overflow: visible; }
-    .template-list { display: flex; overflow-x: auto; gap: 12px; padding-bottom: 10px; }
-    .template-list button { white-space: nowrap; width: auto; margin-bottom: 0; padding: 10px 24px; flex-shrink: 0; }
-}
+    
+    /* 1. REORDER: Templates Top (1), Inputs Middle (2), Preview Bottom (3) */
+    .right-panel { order: 1; }
+    .left-panel { order: 2; }
+    .preview-panel { order: 3; padding: 0; overflow: visible; }
+    
 
 /* =========================
-   MOBILE LAYOUT (MAX 768px)
+   TEMPLATE LINED LIST (Desktop & Mobile)
 ========================= */
+.template-list {
+    display: flex;
+    flex-direction: column; /* Stacks them vertically */
+    gap: 0; /* Removes gap so borders touch */
+    width: 100%;
+    overflow-x: hidden; /* Prevents horizontal scrolling */
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.template-list button {
+    width: 100%;
+    padding: 16px 20px;
+    margin: 0;
+    background: transparent;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left; /* Aligns text neatly to the left */
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* The "Line" between items */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Remove the border from the very last item so it looks clean */
+.template-list button:last-child {
+    border-bottom: none;
+}
+
+/* Hover Effect */
+.template-list button:hover {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+    padding-left: 25px; /* Slight indent animation on hover */
+}
+
+/* Light Mode Overrides */
+body.light .template-list {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+}
+body.light .template-list button {
+    color: #334155;
+    border-bottom: 1px solid #e2e8f0;
+}
+body.light .template-list button:hover {
+    background: #eff6ff;
+    color: #2563eb;
+}
+}
+
 @media (max-width: 768px) {
+    /* 3. MOBILE GRID: Switch to 3 boxes per row on smaller screens */
+    .template-list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Your existing 768px code kept exactly the same */
     .logo-text p { display: none; }
     .navbar { padding: 15px 20px; border-radius: 16px; margin: 10px auto; width: 90%; }
-    
     .hamburger { display: flex; z-index: 1000; }
-    
-    .nav-links {
-        position: fixed; top: 0; right: -100%; width: 250px; height: 100vh;
-        background: rgba(11, 17, 32, 0.95); backdrop-filter: blur(15px);
-        display: flex; flex-direction: column; justify-content: center; align-items: center;
-        transition: 0.4s ease-in-out; box-shadow: -5px 0 20px rgba(0,0,0,0.5); z-index: 999;
-    }
+    .nav-links { position: fixed; top: 0; right: -100%; width: 250px; height: 100vh; background: rgba(11, 17, 32, 0.95); backdrop-filter: blur(15px); display: flex; flex-direction: column; justify-content: center; align-items: center; transition: 0.4s ease-in-out; box-shadow: -5px 0 20px rgba(0,0,0,0.5); z-index: 999; }
     body.light .nav-links { background: rgba(248, 250, 252, 0.95); }
     .nav-links.active { right: 0; }
-
     #themeSwitchContainer { position: absolute; top: 30px; left: 50%; transform: translateX(-50%); margin: 0; }
     #profilePicLink { order: 1; margin-bottom: 25px; }
     .nav-profile-pic { width: 70px; height: 70px; border-width: 3px; }
     #linkTemplates { order: 2; font-size: 20px; margin-bottom: 15px; }
     #linkSettings { order: 3; font-size: 20px; }
-
     #resume-preview { padding: 25px 20px; min-height: auto; }
     .resume-header { flex-direction: column-reverse; text-align: center; gap: 15px; }
     .resume-header h1 { font-size: 28px; }
     .avatar { width: 90px; height: 90px; margin: 0 auto; }
+}
+
+/* 4. EXTRA SMALL MOBILE: Switch to 2 boxes per row on very thin phones */
+@media (max-width: 480px) {
+    .template-list {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+/* =========================
+   PRINT LAYOUT (PDF EXPORT FIX)
+========================= */
+@media print {
+    @page { margin: 0; size: A4 portrait; }
+    .navbar, .left-panel, .right-panel, .download-container, .blob { display: none !important; }
+    html, body { background: white !important; margin: 0 !important; padding: 0 !important; width: 100% !important; height: auto !important; overflow: visible !important; }
+    .builder-container, .preview-panel { display: block !important; position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; margin: 0 !important; padding: 0 !important; background: white !important; }
+    
+    /* Removed !important font-sizes here so the JS algorithm controls the size! */
+    #resume-preview { position: relative !important; margin: 0 auto !important; max-width: 800px !important; padding: 40px 50px !important; box-shadow: none !important; transform: none !important; min-height: 0 !important; }
+    #resume-preview section { background: transparent !important; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    #resume-preview .avatar { width: 80px !important; height: 80px !important; }
+}
+
+/* =========================================
+   REFINED ALIGNMENT (Centered Summary, Left Rest)
+========================================= */
+
+/* Ensure the main container is left-aligned by default */
+#resume-preview {
+    text-align: left !important;
+}
+
+/* Force Center ONLY for the Summary Section */
+#summarySection, 
+#summarySection h2, 
+#summarySection p {
+    text-align: center !important;
+}
+
+/* Ensure the Header (Name/Photo) is LEFT-ALIGNED as you requested */
+.resume-header {
+    display: flex !important;
+    flex-direction: row !important; /* Back to side-by-side */
+    justify-content: space-between !important;
+    align-items: center !important;
+    text-align: left !important;
+}
+
+/* Reset other sections to Left-Align explicitly */
+#resume-preview section:not(#summarySection), 
+#resume-preview section:not(#summarySection) h2, 
+#resume-preview section:not(#summarySection) p {
+    text-align: left !important;
+}
+
+/* Ensure avatar aligns left */
+.avatar {
+    margin: 0 !important;
+}
+/* =========================================
+   NEWSPAPER CHECKBOX STYLING
+========================================= */
+/* Style the container surrounding the newspaper checkbox */
+input#showNewspaper + label {
+    font-weight: 600;
+    color: #60a5fa;
+    cursor: pointer;
+}
+
+input#showNewspaper {
+    transform: scale(1.2);
+    accent-color: #3b82f6;
+}
+
+/* Add a beautiful highlighted box around the Newspaper Layout toggle */
+input#showNewspaper:parent, /* Fallback */
+.checkbox-container:has(input#showNewspaper) {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.checkbox-container:has(input#showNewspaper):hover {
+    background: rgba(59, 130, 246, 0.2);
+    border-color: #3b82f6;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+/* Light mode overrides for the new toggle */
+body.light .checkbox-container:has(input#showNewspaper) {
+    background: #eff6ff;
+    border-color: #bfdbfe;
+}
+body.light .checkbox-container:has(input#showNewspaper):hover {
+    background: #dbeafe;
+    border-color: #3b82f6;
 }
