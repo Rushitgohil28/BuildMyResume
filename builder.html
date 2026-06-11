@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BuildMyResume Builder</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Links to your consolidated CSS -->
     <link rel="stylesheet" href="css/builder.css">
     <link rel="stylesheet" href="css/templates.css">
 </head>
@@ -19,7 +20,7 @@
     <nav class="navbar">
         <div class="logo-area">
             <a href="profile.html" style="display: flex; align-items: center; gap: 15px; text-decoration: none; color: inherit;">
-                <img id="logo" src="assets/logo_light.png" alt="Logo">
+                <img id="logo" src="assets/logo_dark.png" alt="Logo">
                 <div class="logo-text">
                     <h2>BuildMyResume</h2>
                     <p>Create. Customize. Download.</p>
@@ -62,14 +63,12 @@
             <textarea id="education" placeholder="Education Details"></textarea>
             
             <textarea id="experience" placeholder="Experience Details"></textarea>
-            <!-- Toggle for Experience -->
             <div class="checkbox-container">
                 <input type="checkbox" id="showExperience" checked>
                 <label for="showExperience">Show Experience Section</label>
             </div>
 
             <textarea id="project" placeholder="Project Details"></textarea>
-            <!-- Toggle for Projects -->
             <div class="checkbox-container">
                 <input type="checkbox" id="showProject" checked>
                 <label for="showProject">Show Project Section</label>
@@ -77,23 +76,41 @@
 
             <textarea id="skills" placeholder="Skills"></textarea>
 
-            <!-- Photo Upload -->
-            <div class="custom-file-upload">
-                <input type="file" id="profileImage" accept="image/*" hidden>
-                <label for="profileImage" class="upload-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="17 8 12 3 7 8"></polyline>
-                        <line x1="12" y1="3" x2="12" y2="15"></line>
-                    </svg>
-                    Upload Profile Photo
-                </label>
+            <!-- EXTRA SECTION -->
+            <div class="custom-section-box" style="margin-top: 10px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.2);">
+                <h4 style="margin-bottom: 10px; font-size: 14px; color: #60a5fa;">Add Extra Section</h4>
+                <input type="text" id="customTitle" placeholder="Section Title (e.g., Languages, Awards)">
+                <textarea id="customContent" placeholder="Enter details for this section..."></textarea>
+                <div class="checkbox-container">
+                    <input type="checkbox" id="showCustom" checked>
+                    <label for="showCustom">Show Extra Section</label>
+                </div>
             </div>
 
-            <!-- Photo Toggle -->
-            <div class="checkbox-container">
-                <input type="checkbox" id="showPhoto" checked>
-                <label for="showPhoto">Show Profile Photo</label>
+            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.2);">
+                <!-- NEWSPAPER LAYOUT TOGGLE -->
+                <div class="checkbox-container">
+                    <input type="checkbox" id="showNewspaper">
+                    <label for="showNewspaper">📰 Newspaper Layout (2 Columns)</label>
+                </div>
+
+                <!-- Photo Upload -->
+                <div class="custom-file-upload">
+                    <input type="file" id="profileImage" accept="image/*" hidden>
+                    <label for="profileImage" class="upload-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="17 8 12 3 7 8"></polyline>
+                            <line x1="12" y1="3" x2="12" y2="15"></line>
+                        </svg>
+                        Upload Profile Photo
+                    </label>
+                </div>
+                
+                <div class="checkbox-container">
+                    <input type="checkbox" id="showPhoto" checked>
+                    <label for="showPhoto">Show Profile Photo</label>
+                </div>
             </div>
 
             <!-- Export Data Button -->
@@ -107,42 +124,57 @@
             <div id="resume-preview">
                 <div class="resume-header">
                     <div>
-                        <h1 id="previewName">Your Name</h1>
-                        <p id="previewTitle">Professional Title</p>
-                        <p id="previewEmail">Email</p>
-                        <p id="previewPhone">Phone Number</p>
+                        <h1 id="previewName" contenteditable="true">Your Name</h1>
+                        <p id="previewTitle" contenteditable="true">Professional Title</p>
+                        <p id="previewEmail" contenteditable="true">Email</p>
+                        <p id="previewPhone" contenteditable="true">Phone Number</p>
                     </div>
                     <img src="assets/default-avatar.png" id="previewImage" class="avatar" alt="Profile">
                 </div>
                 <hr>
-                <section>
+                
+                <!-- Summary Section -->
+                <section id="summarySection" draggable="true" style="cursor: grab;">
                     <h2>Professional Summary</h2>
-                    <p id="previewSummary">Your summary will appear here.</p>
-                </section>
-                <section>
-                    <h2>Education</h2>
-                    <p id="previewEducation">Education details will appear here.</p>
+                    <p id="previewSummary" contenteditable="true">Your summary will appear here.</p>
                 </section>
                 
-                <section id="experienceSection">
-                    <h2>Experience</h2>
-                    <p id="previewExperience">Experience details will appear here.</p>
-                </section>
-                
-                <section id="projectSection">
-                    <h2>Projects</h2>
-                    <p id="previewProjects">Project details will appear here.</p>
-                </section>
+                <!-- The wrapper that turns into 2 columns -->
+                <div id="resume-body">
+                    <section id="educationSection" draggable="true" style="cursor: grab;">
+                        <h2>Education</h2>
+                        <p id="previewEducation" contenteditable="true">Education details will appear here.</p>
+                    </section>
+                    
+                    <section id="experienceSection" draggable="true" style="cursor: grab;">
+                        <h2>Experience</h2>
+                        <p id="previewExperience" contenteditable="true">Experience details will appear here.</p>
+                    </section>
+                    
+                    <section id="projectSection" draggable="true" style="cursor: grab;">
+                        <h2>Projects</h2>
+                        <p id="previewProjects" contenteditable="true">Project details will appear here.</p>
+                    </section>
 
-                <section>
-                    <h2>Skills</h2>
-                    <p id="previewSkills">Skills will appear here.</p>
-                </section>
+                    <section id="skillsSection" draggable="true" style="cursor: grab;">
+                        <h2>Skills</h2>
+                        <p id="previewSkills" contenteditable="true">Skills will appear here.</p>
+                    </section>
+
+                    <section id="customSection" draggable="true" style="cursor: grab;">
+                        <h2 id="previewCustomTitle" contenteditable="true">Extra Section</h2>
+                        <p id="previewCustomContent" contenteditable="true">Extra details will appear here.</p>
+                    </section>
+                </div>
+
             </div>
-
-            <!-- Download Button -->
-            <div class="download-container">
+            <!-- Download Buttons -->
+            <div class="download-container" style="display: flex; gap: 15px; justify-content: center; margin-top: 20px; padding-bottom: 30px;">
                 <button class="download-btn">Download PDF</button>
+                
+                <!-- NEW: Save as JPG Button -->
+                <button class="download-jpg-btn" style="padding: 14px 28px; font-size: 15px; font-weight: 600; border: none; border-radius: 10px; background: linear-gradient(135deg, #10b981, #059669); color: white; cursor: pointer; transition: .3s; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);">Save as JPG</button>
+                
             </div>
         </main>
 
@@ -162,11 +194,13 @@
         </aside>
 
     </div>
-
-    <!-- html2pdf Library for Direct PDF Download -->
+ <!-- html2pdf Library for Direct PDF Download -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     
-    <!-- Scripts -->
+    <!-- ADD THIS LINE: html2canvas for JPG Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- Your Scripts -->
     <script src="js/builder.js"></script>
     <script src="js/theme.js"></script>
 
